@@ -1,109 +1,406 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        darkMode: 'class',
-      }
-    </script>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Аня Волкова — портфолио</title>
+<meta name="description" content="Портфолио студентки-дизайнера — lo-fi, минимализм, немного тёплого шума.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎧</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100">
-    <header class="container mx-auto px-6 py-4 flex justify-between items-center">
-        <h1 class="text-2xl font-bold">My Portfolio</h1>
-        <div class="flex items-center">
-            <nav class="hidden md:flex items-center">
-                <ul class="flex space-x-4">
-                    <li><a href="#about" class="hover:text-gray-400">About</a></li>
-                    <li><a href="#projects" class="hover:text-gray-400">Projects</a></li>
-                    <li><a href="#contact" class="hover:text-gray-400">Contact</a></li>
-                </ul>
-            </nav>
-            <button id="theme-toggle" class="ml-4">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-            </button>
-            <div class="md:hidden flex items-center ml-4">
-                <button id="mobile-menu-button">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                </button>
-            </div>
+<body class="is-loading">
+
+  <!-- grain overlay -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- custom cursor -->
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <!-- preloader -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader-vinyl">
+      <div class="preloader-vinyl-inner"></div>
+    </div>
+    <p class="preloader-text mono">заваривается портфолио<span class="dots"><span>.</span><span>.</span><span>.</span></span></p>
+  </div>
+
+  <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="#top" class="logo">
+        <span class="logo-mark">a.v</span>
+        <span class="logo-sub mono">студентка · дизайн</span>
+      </a>
+
+      <nav class="nav" id="siteNav">
+        <a href="#about" data-cursor="link">обо мне</a>
+        <a href="#skills" data-cursor="link">навыки</a>
+        <a href="#projects" data-cursor="link">проекты</a>
+        <a href="#timeline" data-cursor="link">путь</a>
+        <a href="#contact" data-cursor="link">контакты</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" data-cursor="link">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"/></svg>
+        </button>
+        <button class="burger" id="burger" aria-label="Открыть меню" data-cursor="link">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#about">обо мне</a>
+    <a href="#skills">навыки</a>
+    <a href="#projects">проекты</a>
+    <a href="#timeline">путь</a>
+    <a href="#contact">контакты</a>
+  </div>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero wrap">
+      <div class="hero-tag reveal mono">
+        <span class="dot-live"></span> открыта для стажировок · 2026
+      </div>
+
+      <h1 class="hero-title">
+        <span class="reveal-line"><span class="reveal-inner">Привет, я</span></span>
+        <span class="reveal-line"><span class="reveal-inner hero-name">Аня Волкова<span class="ink">.</span></span></span>
+      </h1>
+
+      <p class="hero-role mono reveal" style="--d:3">
+        <span id="typewriter"></span><span class="caret">|</span>
+      </p>
+
+      <p class="hero-lead reveal" style="--d:4">
+        Учусь на 3 курсе «Дизайна и цифровых медиа», делаю интерфейсы, которые
+        хочется рассматривать медленно — как виниловую пластинку, а не как ленту.
+        Люблю тёплые цвета, зерно на фото и аккуратную типографику.
+      </p>
+
+      <div class="hero-actions reveal" style="--d:5">
+        <a href="#projects" class="btn btn-primary" data-cursor="link">смотреть проекты</a>
+        <a href="#contact" class="btn btn-ghost" data-cursor="link">написать мне</a>
+      </div>
+
+      <!-- lo-fi player widget -->
+      <div class="player reveal" style="--d:6" id="player">
+        <button class="player-toggle" id="playerToggle" aria-label="Проиграть/пауза" data-cursor="link">
+          <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5-11-6.5Z"/></svg>
+          <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+        </button>
+        <div class="player-info">
+          <p class="player-title">lofi study beats</p>
+          <p class="player-sub mono">study &amp; code — 24/7</p>
         </div>
-    </header>
-    <div id="mobile-menu" class="hidden md:hidden">
-        <ul class="flex flex-col items-center space-y-2 py-4">
-            <li><a href="#about" class="hover:text-gray-400">About</a></li>
-            <li><a href="#projects" class="hover:text-gray-400">Projects</a></li>
-            <li><a href="#contact" class="hover:text-gray-400">Contact</a></li>
-        </ul>
+        <div class="equalizer" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <a href="#about" class="scroll-cue" data-cursor="link" aria-label="Прокрутить вниз">
+        <span class="scroll-cue-line"></span>
+        <span class="mono">вниз</span>
+      </a>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee-strip">
+      <div class="marquee-track">
+        <span>UI/UX ДИЗАЙН</span><span>·</span><span>FIGMA</span><span>·</span>
+        <span>ВЕБ-ВЁРСТКА</span><span>·</span><span>ИЛЛЮСТРАЦИЯ</span><span>·</span>
+        <span>МОУШН-ДИЗАЙН</span><span>·</span><span>ТИПОГРАФИКА</span><span>·</span>
+        <span>UI/UX ДИЗАЙН</span><span>·</span><span>FIGMA</span><span>·</span>
+        <span>ВЕБ-ВЁРСТКА</span><span>·</span><span>ИЛЛЮСТРАЦИЯ</span><span>·</span>
+        <span>МОУШН-ДИЗАЙН</span><span>·</span><span>ТИПОГРАФИКА</span><span>·</span>
+      </div>
     </div>
 
-    <main class="container mx-auto px-6 py-12">
-        <section id="hero" class="text-center">
-            <h2 class="text-5xl font-extrabold mb-4">Hello, I'm [Name]</h2>
-            <p class="text-xl mb-8">A passionate developer building amazing things.</p>
-            <a href="#contact" class="bg-blue-600 text-white py-2 px-6 rounded-full hover:bg-blue-700">Contact Me</a>
-        </section>
+    <!-- ABOUT -->
+    <section id="about" class="about wrap">
+      <div class="section-head reveal">
+        <span class="section-num mono">01</span>
+        <h2 class="section-title">обо мне</h2>
+      </div>
 
-        <section id="about" class="mt-20">
-            <h3 class="text-3xl font-bold mb-6 text-center">About Me</h3>
-            <p class="max-w-2xl mx-auto text-center">
-                I am a software developer with a passion for creating beautiful and functional web applications. I have experience with a variety of technologies and I am always looking to learn new things.
-            </p>
-        </section>
-
-        <section id="projects" class="mt-20">
-            <h3 class="text-3xl font-bold mb-6 text-center">Projects</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-gray-100 dark:bg-gray-800 rounded-lg shadow-lg p-6">
-                    <h4 class="text-xl font-bold mb-2">Project 1</h4>
-                    <p>A brief description of the project.</p>
-                </div>
-                <div class="bg-gray-100 dark:bg-gray-800 rounded-lg shadow-lg p-6">
-                    <h4 class="text-xl font-bold mb-2">Project 2</h4>
-                    <p>A brief description of the project.</p>
-                </div>
-                <div class="bg-gray-100 dark:bg-gray-800 rounded-lg shadow-lg p-6">
-                    <h4 class="text-xl font-bold mb-2">Project 3</h4>
-                    <p>A brief description of the project.</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer id="contact" class="bg-gray-100 dark:bg-gray-800 mt-20 py-6">
-        <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2024 [Name]. All rights reserved.</p>
-            <div class="flex justify-center space-x-4 mt-4">
-                <a href="#" class="hover:text-gray-400">GitHub</a>
-                <a href="#" class="hover:text-gray-400">LinkedIn</a>
-                <a href="#" class="hover:text-gray-400">Twitter</a>
-            </div>
+      <div class="about-grid">
+        <div class="about-portrait reveal">
+          <div class="portrait-frame">
+            <div class="portrait-blob"></div>
+            <span class="portrait-emoji">🌿</span>
+          </div>
+          <div class="portrait-tape">анна.волкова</div>
         </div>
-    </footer>
-    <script>
-        const themeToggle = document.getElementById('theme-toggle');
-        const html = document.querySelector('html');
 
-        themeToggle.addEventListener('click', () => {
-            html.classList.toggle('dark');
-            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
-        });
+        <div class="about-copy reveal" style="--d:2">
+          <p class="about-lead">
+            Я собираю интерфейсы так же, как собирают плейлист для дождливого
+            вечера — по ощущениям, не только по правилам.
+          </p>
+          <p>
+            Второй год совмещаю учёбу с фриланс-проектами: делаю лендинги,
+            мобильные экраны и небольшие дизайн-системы для локальных
+            брендов. Мне важно, чтобы продукт был понятным с первого касания
+            и приятным при десятом.
+          </p>
 
-        // On page load, check for saved theme preference
-        if (localStorage.getItem('theme') === 'dark') {
-            html.classList.add('dark');
-        }
+          <div class="facts">
+            <div class="fact-item">
+              <span class="fact-num">3<sup>й</sup></span>
+              <span class="fact-label mono">курс университета</span>
+            </div>
+            <div class="fact-item">
+              <span class="fact-num">12+</span>
+              <span class="fact-label mono">проектов сделано</span>
+            </div>
+            <div class="fact-item">
+              <span class="fact-num">2</span>
+              <span class="fact-label mono">чашки кофе / деплой</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
+    <!-- SKILLS -->
+    <section id="skills" class="skills wrap">
+      <div class="section-head reveal">
+        <span class="section-num mono">02</span>
+        <h2 class="section-title">навыки</h2>
+      </div>
 
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-    </script>
+      <div class="skills-grid">
+        <article class="skill-card reveal">
+          <span class="skill-icon">🎨</span>
+          <h3>Дизайн</h3>
+          <div class="tag-row">
+            <span class="tag">Figma</span><span class="tag">UI Kit</span>
+            <span class="tag">Прототипы</span><span class="tag">Illustrator</span>
+          </div>
+        </article>
+        <article class="skill-card reveal" style="--d:2">
+          <span class="skill-icon">🧩</span>
+          <h3>Фронтенд</h3>
+          <div class="tag-row">
+            <span class="tag">HTML/CSS</span><span class="tag">JavaScript</span>
+            <span class="tag">Анимации</span><span class="tag">Адаптив</span>
+          </div>
+        </article>
+        <article class="skill-card reveal" style="--d:3">
+          <span class="skill-icon">📐</span>
+          <h3>Процесс</h3>
+          <div class="tag-row">
+            <span class="tag">Wireframes</span><span class="tag">Research</span>
+            <span class="tag">A/B тесты</span><span class="tag">Дизайн-системы</span>
+          </div>
+        </article>
+        <article class="skill-card reveal" style="--d:4">
+          <span class="skill-icon">☕</span>
+          <h3>Софт-скиллы</h3>
+          <div class="tag-row">
+            <span class="tag">Тайм-менеджмент</span><span class="tag">Питчинг</span>
+            <span class="tag">Обратная связь</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="projects wrap">
+      <div class="section-head reveal">
+        <span class="section-num mono">03</span>
+        <h2 class="section-title">проекты</h2>
+      </div>
+
+      <div class="projects-grid">
+
+        <article class="project-card reveal">
+          <div class="project-thumb thumb-1">
+            <span class="project-emoji">☕</span>
+          </div>
+          <div class="project-body">
+            <div class="project-top">
+              <h3>Coffee&nbsp;Lab</h3>
+              <span class="project-year mono">2025</span>
+            </div>
+            <p>Сайт-визитка кофейни с онлайн-меню и бронью столиков. Тёплая
+              палитра, крупная типографика, лёгкие скролл-анимации.</p>
+            <div class="tag-row">
+              <span class="tag">Figma</span><span class="tag">HTML/CSS</span><span class="tag">JS</span>
+            </div>
+          </div>
+          <a class="project-link" href="#" data-cursor="link" aria-label="Открыть проект Coffee Lab">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+        </article>
+
+        <article class="project-card reveal" style="--d:2">
+          <div class="project-thumb thumb-2">
+            <span class="project-emoji">🪴</span>
+          </div>
+          <div class="project-body">
+            <div class="project-top">
+              <h3>Terra App</h3>
+              <span class="project-year mono">2025</span>
+            </div>
+            <p>Мобильное приложение-трекер для комнатных растений. Курсовой
+              проект: от исследования до кликабельного прототипа.</p>
+            <div class="tag-row">
+              <span class="tag">UX Research</span><span class="tag">Prototype</span>
+            </div>
+          </div>
+          <a class="project-link" href="#" data-cursor="link" aria-label="Открыть проект Terra App">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+        </article>
+
+        <article class="project-card reveal" style="--d:3">
+          <div class="project-thumb thumb-3">
+            <span class="project-emoji">📼</span>
+          </div>
+          <div class="project-body">
+            <div class="project-top">
+              <h3>Lo-Fi Radio</h3>
+              <span class="project-year mono">2024</span>
+            </div>
+            <p>Веб-плеер с кассетной эстетикой для учебного проекта по
+              моушн-дизайну. Анимированный эквалайзер и виниловый лоадер.</p>
+            <div class="tag-row">
+              <span class="tag">CSS Animation</span><span class="tag">JavaScript</span>
+            </div>
+          </div>
+          <a class="project-link" href="#" data-cursor="link" aria-label="Открыть проект Lo-Fi Radio">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+        </article>
+
+        <article class="project-card reveal" style="--d:4">
+          <div class="project-thumb thumb-4">
+            <span class="project-emoji">🗂️</span>
+          </div>
+          <div class="project-body">
+            <div class="project-top">
+              <h3>Studio&nbsp;Grain</h3>
+              <span class="project-year mono">2024</span>
+            </div>
+            <p>Дизайн-система и брендбук для студенческой fashion-марки:
+              шрифты, сетка, компоненты сайта.</p>
+            <div class="tag-row">
+              <span class="tag">Design System</span><span class="tag">Branding</span>
+            </div>
+          </div>
+          <a class="project-link" href="#" data-cursor="link" aria-label="Открыть проект Studio Grain">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section id="timeline" class="timeline wrap">
+      <div class="section-head reveal">
+        <span class="section-num mono">04</span>
+        <h2 class="section-title">мой путь</h2>
+      </div>
+
+      <div class="timeline-list">
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="mono timeline-date">2023 — сейчас</span>
+            <h3>Университет, факультет дизайна</h3>
+            <p>Изучаю UI/UX, типографику и веб-разработку. Веду учебные и
+              фриланс-проекты параллельно.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal" style="--d:2">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="mono timeline-date">лето 2024</span>
+            <h3>Стажировка — продуктовая студия</h3>
+            <p>Помогала команде с UI-компонентами и адаптивной вёрсткой
+              лендингов для трёх клиентов.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal" style="--d:3">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="mono timeline-date">2022</span>
+            <h3>Первые самостоятельные проекты</h3>
+            <p>Начала брать небольшие заказы: визитки, соцсети, простые
+              сайты на конструкторах.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact wrap">
+      <div class="section-head reveal">
+        <span class="section-num mono">05</span>
+        <h2 class="section-title">на связи</h2>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-copy reveal">
+          <p class="contact-lead">
+            Есть интересный проект, стажировка или просто хочется
+            обсудить дизайн за чашкой кофе? Пишите — отвечаю быстро.
+          </p>
+          <a class="contact-email" href="mailto:anna.volkova@example.com" data-cursor="link">
+            anna.volkova@example.com
+          </a>
+          <div class="social-row">
+            <a href="#" class="social-link" data-cursor="link" aria-label="Telegram">TG</a>
+            <a href="#" class="social-link" data-cursor="link" aria-label="GitHub">GH</a>
+            <a href="#" class="social-link" data-cursor="link" aria-label="Behance">BE</a>
+            <a href="#" class="social-link" data-cursor="link" aria-label="LinkedIn">IN</a>
+          </div>
+        </div>
+
+        <form class="contact-form reveal" style="--d:2" id="contactForm">
+          <div class="form-row">
+            <label class="mono" for="name">имя</label>
+            <input id="name" name="name" type="text" placeholder="как к вам обращаться" required>
+          </div>
+          <div class="form-row">
+            <label class="mono" for="email">почта</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required>
+          </div>
+          <div class="form-row">
+            <label class="mono" for="message">сообщение</label>
+            <textarea id="message" name="message" rows="4" placeholder="расскажите пару слов о проекте" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary form-submit" data-cursor="link">
+            отправить <span class="form-submit-arrow">→</span>
+          </button>
+          <p class="form-note mono" id="formNote">форма демонстрационная — подключите бэкенд, чтобы получать письма</p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p class="mono">© 2026 Аня Волкова · сделано с ☕ и вниманием к деталям</p>
+      <button class="to-top" id="toTop" aria-label="Наверх" data-cursor="link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m6 15 6-6 6 6"/></svg>
+      </button>
+    </div>
+  </footer>
+
+<script src="script.js"></script>
 </body>
 </html>
